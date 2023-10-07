@@ -1,0 +1,43 @@
+# docker-compose.yml
+
+version: "3"
+
+services:
+  webapp:
+    container_name: dreambox-app
+    # The name of the image that will be created when building this container
+    image: front
+    build:
+      context: ./front 
+      dockerfile: Dockerfile
+    user: "node"
+    environment:
+      # Internal server error messages will not send stacktrace to the browser in production
+      - NODE_ENV=production
+      # Sets the timezone of the containers OS
+      - TZ=Pacific/Auckland
+    # Points to a file with the sensitive environment variables
+    env_file:
+      - ./front/.env
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+
+  strapi:
+    container_name: strapi-app
+    # The name of the image that will be created when building this container
+    image: cms-strapi
+    build:
+      context: ./cms
+      dockerfile: Dockerfile
+    environment:
+      # Internal server error messages will not send stacktrace to the browser in production
+      - NODE_ENV=production
+      # Sets the timezone of the containers OS
+      - TZ=Pacific/Auckland
+    # Points to a file with the sensitive environment variables
+    env_file:
+      - ./cms/.env
+    restart: unless-stopped
+    ports:
+      - 1337:1337
