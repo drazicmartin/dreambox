@@ -69,10 +69,10 @@
     {/if}
     {#if showCards || loading}
         <div class="grid grid-flow-col grid-rows-2 lg:grid-rows-1 max-w-2xl gap-5 mt-3">
-            <Card delay={delay*0} title={data.character.title} description={data.character.description} type={data.character.type} image_url={image_urls.character}/>
-            <Card delay={delay*2} title={data.spot.title} description={data.spot.description} type={data.spot.type} image_url={image_urls.spot} />
-            <Card delay={delay*4} title={data.universe.title} description={data.universe.description} type={data.universe.type} image_url={image_urls.universe}/>
-            <Card delay={delay*6} title={data.quest.title} description={data.quest.description} type={data.quest.type} image_url={image_urls.quest}/>
+            <Card delay={delay*0} title={data.character.title} description={data.character.description} type={data.character.type} image_url={image_urls.character} is_new={data.character.is_new}/>
+            <Card delay={delay*2} title={data.spot.title} description={data.spot.description} type={data.spot.type} image_url={image_urls.spot} is_new={data.spot.is_new}/>
+            <Card delay={delay*4} title={data.universe.title} description={data.universe.description} type={data.universe.type} image_url={image_urls.universe} is_new={data.universe.is_new}/>
+            <Card delay={delay*6} title={data.quest.title} description={data.quest.description} type={data.quest.type} image_url={image_urls.quest} is_new={data.quest.is_new}/>
         </div>
     {/if}
     {#if showCards}
@@ -83,15 +83,19 @@
             <form action="?/generate_story" method="POST">
                 <input type="hidden" name="character_title" value={data.character.title}>
                 <input type="hidden" name="character_description" value={data.character.description}>
+                <input type="hidden" name="character_id" value={data.character.id}>
                 
                 <input type="hidden" name="spot_title" value={data.spot.title}>
                 <input type="hidden" name="spot_description" value={data.spot.description}>
+                <input type="hidden" name="spot_id" value={data.spot.id}>
                 
                 <input type="hidden" name="universe_title" value={data.universe.title}>
                 <input type="hidden" name="universe_description" value={data.universe.description}>
+                <input type="hidden" name="universe_id" value={data.universe.id}>
 
                 <input type="hidden" name="quest_title" value={data.quest.title}>
                 <input type="hidden" name="quest_description" value={data.quest.description}>
+                <input type="hidden" name="quest_id" value={data.quest.id}>
 
                 <button out:fly in:slide={{delay:delay*16}} on:click={handleSubmit} type="submit" class="btn bg-gradient-to-br variant-gradient-tertiary-primary my-5 grow">
                     Tell me the story !

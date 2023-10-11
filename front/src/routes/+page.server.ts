@@ -15,15 +15,34 @@ export const actions = {
 
 		const character_title = data.get('character_title');
 		const character_description = data.get('character_description');
+        const character_id = data.get('character_id');
         
 		const spot_title = data.get('spot_title');
 		const spot_description = data.get('spot_description');
+        const spot_id = data.get('spot_id');
         
 		const universe_title = data.get('universe_title');
 		const universe_description = data.get('universe_description');
+        const universe_id = data.get('universe_id');
         
 		const quest_title = data.get('quest_title');
 		const quest_description = data.get('quest_description');
+        const quest_id = data.get('quest_id');
+
+        // Set new card attibute to false 
+
+        [character_id, spot_id, universe_id, quest_id].forEach(card_id => {
+            axios.put(BACKEND_URL + 'cards/' + card_id, {
+                data: {
+                    is_new: false
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        });
+
+        // generate the story
 
         const response_story = await openai.chat.completions.create({
                 model: "gpt-3.5-turbo",
@@ -56,8 +75,10 @@ export const actions = {
 
         let story = response_story.choices[0].message.content;
 
+        // generate the image
+
         const response_img = await openai.images.generate({
-            prompt: `${character_description} in ${universe_title}`,
+            prompt: `${character_description} in the universe of ${universe_title}`,
             size: "256x256",
         })
 

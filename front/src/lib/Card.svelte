@@ -6,14 +6,16 @@
     export let description = "DESCRIPTION";
     export let type = "TYPE";
     export let delay = 0;
+
+    export let is_new = true;
 </script>
 
-<a href="/" class="flex flex-col justify-between items-center card card-hover" in:blur={{
+<a href="/" class="flex flex-col w-40 justify-between items-center card {is_new ? 'border-solid border-yellow-300 border-4' : ''} card-hover" in:blur={{
         delay: delay,
     }}
     out:fly
     >
-    <img src={image_url} width="10" class="w-40 justify-center" alt="Post">
+    <img src={image_url} class="justify-center" alt="Post">
     <header class="card-header text-2xl text-amber-900">
         {title}
     </header>
