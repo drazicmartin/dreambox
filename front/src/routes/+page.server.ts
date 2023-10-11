@@ -57,7 +57,8 @@ export const actions = {
         let story = response_story.choices[0].message.content;
 
         const response_img = await openai.images.generate({
-            prompt: `${story?.slice(0,999)}`
+            prompt: `${character_description} in ${universe_title}`,
+            size: "256x256",
         })
 
         let img_url = response_img.data[0].url;
