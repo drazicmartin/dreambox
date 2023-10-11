@@ -13,7 +13,8 @@ const config = {
 		join(require.resolve(
 			'@skeletonlabs/skeleton'),
 			'../**/*.{html,js,svelte,ts}'
-		)
+		),
+		"./node_modules/flowbite/**/*.js"
 	],
 	theme: {
 		extend: {},
@@ -21,7 +22,8 @@ const config = {
 	plugins: [
 		skeleton({
 			themes: { preset: [ "hamlindigo" ] }
-		})
+		}),
+		require('flowbite/plugin')
 	]
 
 } satisfies Config;
