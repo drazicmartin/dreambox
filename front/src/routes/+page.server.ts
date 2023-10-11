@@ -44,7 +44,7 @@ export const actions = {
                         You must use <br> to create return line.
                         You must write the story in french.
                         you must use html elements and css to stylise the text.
-                        you must not finish the story, but let the reader think of the endding.
+                        you must not finish the story, but you must tell the reader to imagine the end of the story.
                     `
                     },
                     {
