@@ -35,17 +35,16 @@ export const actions = {
                         All those informations are given in the following lines.
                         You should write the story according to the universe.
                         The main character can not unsucced the quest.
-                        You should never explain which universe you are using.
-                        You should never write the name of the universe you are using.
-                        You should never use the phrase i gave to you as information.
+                        you must be descriptive as much as possible and give details.
                         The main character is ${character_title}, ${character_description}.
                         The spot is ${spot_title}, ${spot_description}.
                         The quest is ${quest_title}, ${quest_description}.
                         The universe is ${universe_title}, ${universe_description}.
-                        The story must have a least 3 paragraph but it can have more.
+                        You must not write the name of the universe you are using.
                         You must use <br> to create return line.
                         You must write the story in french.
-                        you can use html elements and css to stylise the text.
+                        you must use html elements and css to stylise the text.
+                        you must not finish the story, but let the reader think of the endding.
                     `
                     },
                     {
