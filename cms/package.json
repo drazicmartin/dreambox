@@ -2,7 +2,7 @@
   "name": "cms",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "backend cms for dreambox",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -18,7 +18,7 @@
     "better-sqlite3": "8.6.0"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Drazic"
   },
   "strapi": {
     "uuid": "44f8775d-5b43-4bd9-94ea-c143de9a4836"

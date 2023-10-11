@@ -6,10 +6,7 @@ services:
   webapp:
     container_name: dreambox-app
     # The name of the image that will be created when building this container
-    image: front
-    build:
-      context: ./front 
-      dockerfile: Dockerfile
+    image: dreambox-pi-front:latest
     user: "node"
     environment:
       # Internal server error messages will not send stacktrace to the browser in production
@@ -26,10 +23,7 @@ services:
   strapi:
     container_name: strapi-app
     # The name of the image that will be created when building this container
-    image: cms-strapi
-    build:
-      context: ./cms
-      dockerfile: Dockerfile
+    image: dreambox-pi-cms:latest
     environment:
       # Internal server error messages will not send stacktrace to the browser in production
       - NODE_ENV=production

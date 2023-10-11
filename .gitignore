@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 llm/
+front/dreambox-pi-front.tar
