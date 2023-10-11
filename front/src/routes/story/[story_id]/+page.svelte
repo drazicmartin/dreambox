@@ -10,7 +10,7 @@
 
 <div class="flex flex-col items-center">
 	{#if image_url}
-		<img class="max-w-5xl" src={image_url} alt="image representing to following story" />
+		<img class="h-auto w-auto rounded-lg shadow-xl dark:shadow-gray-800" src={image_url} alt="image representing to following story">
 	{/if}
 	<p class="text-lg m-10" align="justify">
 			{@html text}
