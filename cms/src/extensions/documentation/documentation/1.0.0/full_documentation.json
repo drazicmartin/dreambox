@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-10-11T22:35:07.314Z"
+    "x-generation-date": "2023-10-11T23:23:18.032Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -93,6 +93,9 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "is_new"
+            ],
             "type": "object",
             "properties": {
               "title": {
@@ -109,6 +112,9 @@
                   "quest",
                   "universe"
                 ]
+              },
+              "is_new": {
+                "type": "boolean"
               }
             }
           }
@@ -162,6 +168,9 @@
       },
       "Card": {
         "type": "object",
+        "required": [
+          "is_new"
+        ],
         "properties": {
           "title": {
             "type": "string"
@@ -177,6 +186,9 @@
               "quest",
               "universe"
             ]
+          },
+          "is_new": {
+            "type": "boolean"
           },
           "createdAt": {
             "type": "string",

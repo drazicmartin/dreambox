@@ -26,6 +26,11 @@
         "quest",
         "universe"
       ]
+    },
+    "is_new": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }
