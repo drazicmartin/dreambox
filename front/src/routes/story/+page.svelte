@@ -1,10 +1,7 @@
 <script lang="ts">
-	import Card from '$lib/Card.svelte';
-
     export let data;
 
     import IoMdBook from 'svelte-icons/io/IoMdBook.svelte'
-	import { each } from 'svelte/internal';
 
     const typeOrder = [
         "Universe",
