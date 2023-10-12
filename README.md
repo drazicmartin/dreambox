@@ -29,13 +29,16 @@ docker build --platform linux/arm/v7 -t dreambox-pi-cms:latest ./cms
 
 (optional) Share the image
 ```
-docker save <image-name> -o <saveFile.tar>
-docker load -i <saveFile.tar>
+docker save <IMAGE_NAME> -o <SAVE_FILE.tar>
+docker load -i <SAVE_FILE.tar>
+
+docker save dreambox-pi-front:latest -o dreambox-pi-front.tar
+docker save dreambox-pi-cms:latest -o dreambox-pi-cms.tar
 ```
 
 Deploy
 ```
-docker-compose -f pi-docker-compose.yaml
+docker-compose -f pi-docker-compose.yaml up
 ```
 
 - copy/paste `.env.example`, rename it `.env` and fill it with your openai key
