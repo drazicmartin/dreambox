@@ -1,2 +1,4 @@
-// export const BACKEND_URL: string = `http://89.156.35.1:1337/api/`
-export const BACKEND_URL: string = `http://localhost:1337/api/`
+import { PUBLIC_BACKEND_IP } from "$env/static/public"
+import { PUBLIC_BACKEND_PORT } from "$env/static/public"
+
+export const BACKEND_URL: string = `http://${PUBLIC_BACKEND_IP}:${PUBLIC_BACKEND_PORT}/api/`
