@@ -19,6 +19,8 @@ npm run strapi develop
 
 ## Build project for on docker rapsberry Pi-3
 
+> :warning: Must change backend address in ./front/src/lib/constant.js
+
 Build images
 ```
 # Front
