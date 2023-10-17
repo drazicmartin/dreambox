@@ -6,28 +6,23 @@
     import character_img from "$lib/assets/character.png"
 
     import { slide, fly } from "svelte/transition";
-    import axios from 'axios';
-	import { BACKEND_URL } from "$lib/constants";
+	import type { SetOfCards } from "$lib/types";
+	import { formToJSON } from "axios";
+	import { onMount } from "svelte";
 
     let showCards = false;
     let loading = false;
     let drawing = false;
 
-    let data: Object;
-
     export let form;
+
+    let cards: SetOfCards;
+    $: cards = form?.cards!;
 
     const delay = 35;
 
     async function handleOnClick(){
         drawing = true;
-
-        await axios.get(BACKEND_URL + 'card/draw').then(response => {
-            data = response.data.data;
-        });
-
-        drawing = false;
-        showCards = !showCards;
     }
 
     const image_urls = {
@@ -41,6 +36,10 @@
         loading = true;
         showCards = false;
     }
+
+    onMount(() => {
+        showCards = form ? true : false ;
+    })
 </script>
 
 <div class="flex flex-col items-center">
@@ -63,16 +62,18 @@
         </button>
     {/if}
     {#if !showCards && !loading && !drawing}
-        <button on:click={handleOnClick} transition:slide type="button" class="btn bg-gradient-to-br variant-gradient-tertiary-primary my-3">
+    <form action="?/draw_cards" method="POST" >
+        <button on:click={handleOnClick} transition:slide type="submit" class="btn bg-gradient-to-br variant-gradient-tertiary-primary my-3">
             Draw Cards
         </button>
+    </form>
     {/if}
     {#if showCards || loading}
         <div class="grid grid-flow-col grid-rows-2 lg:grid-rows-1 max-w-2xl gap-5 mt-3">
-            <Card delay={delay*0} title={data.character.title} description={data.character.description} type={data.character.type} image_url={image_urls.character} is_new={data.character.is_new}/>
-            <Card delay={delay*2} title={data.spot.title} description={data.spot.description} type={data.spot.type} image_url={image_urls.spot} is_new={data.spot.is_new}/>
-            <Card delay={delay*4} title={data.universe.title} description={data.universe.description} type={data.universe.type} image_url={image_urls.universe} is_new={data.universe.is_new}/>
-            <Card delay={delay*6} title={data.quest.title} description={data.quest.description} type={data.quest.type} image_url={image_urls.quest} is_new={data.quest.is_new}/>
+            <Card delay={delay*0} title={cards.character.title} description={cards.character.description} type={cards.character.type} image_url={image_urls.character} is_new={cards.character.is_new}/>
+            <Card delay={delay*2} title={cards.spot.title} description={cards.spot.description} type={cards.spot.type} image_url={image_urls.spot} is_new={cards.spot.is_new}/>
+            <Card delay={delay*4} title={cards.universe.title} description={cards.universe.description} type={cards.universe.type} image_url={image_urls.universe} is_new={cards.universe.is_new}/>
+            <Card delay={delay*6} title={cards.quest.title} description={cards.quest.description} type={cards.quest.type} image_url={image_urls.quest} is_new={cards.quest.is_new}/>
         </div>
     {/if}
     {#if showCards}
@@ -81,21 +82,21 @@
                 Back
             </button>
             <form action="?/generate_story" method="POST">
-                <input type="hidden" name="character_title" value={data.character.title}>
-                <input type="hidden" name="character_description" value={data.character.description}>
-                <input type="hidden" name="character_id" value={data.character.id}>
+                <input type="hidden" name="character_title" value={cards.character.title}>
+                <input type="hidden" name="character_description" value={cards.character.description}>
+                <input type="hidden" name="character_id" value={cards.character.id}>
                 
-                <input type="hidden" name="spot_title" value={data.spot.title}>
-                <input type="hidden" name="spot_description" value={data.spot.description}>
-                <input type="hidden" name="spot_id" value={data.spot.id}>
+                <input type="hidden" name="spot_title" value={cards.spot.title}>
+                <input type="hidden" name="spot_description" value={cards.spot.description}>
+                <input type="hidden" name="spot_id" value={cards.spot.id}>
                 
-                <input type="hidden" name="universe_title" value={data.universe.title}>
-                <input type="hidden" name="universe_description" value={data.universe.description}>
-                <input type="hidden" name="universe_id" value={data.universe.id}>
+                <input type="hidden" name="universe_title" value={cards.universe.title}>
+                <input type="hidden" name="universe_description" value={cards.universe.description}>
+                <input type="hidden" name="universe_id" value={cards.universe.id}>
 
-                <input type="hidden" name="quest_title" value={data.quest.title}>
-                <input type="hidden" name="quest_description" value={data.quest.description}>
-                <input type="hidden" name="quest_id" value={data.quest.id}>
+                <input type="hidden" name="quest_title" value={cards.quest.title}>
+                <input type="hidden" name="quest_description" value={cards.quest.description}>
+                <input type="hidden" name="quest_id" value={cards.quest.id}>
 
                 <button out:fly in:slide={{delay:delay*16}} on:click={handleSubmit} type="submit" class="btn bg-gradient-to-br variant-gradient-tertiary-primary my-5 grow">
                     Tell me the story !

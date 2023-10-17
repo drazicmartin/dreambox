@@ -3,6 +3,8 @@ import OpenAI from "openai";
 import axios from 'axios';
 import { BACKEND_URL } from '$lib/constants.js';
 import { redirect } from '@sveltejs/kit';
+import { generateImage, generateImageOfCards } from '$lib/utils';
+import type { SetOfCards } from '$lib/types.js';
 
 const openai = new OpenAI({
     apiKey: OPENAI_API_KEY,
@@ -77,10 +79,7 @@ export const actions = {
 
         // generate the image
 
-        const response_img = await openai.images.generate({
-            prompt: `${character_description} in the universe of ${universe_title}`,
-            size: "256x256",
-        })
+        const response_img = await generateImage(`${character_description} in the universe of ${universe_title}`);
 
         let img_url = response_img.data[0].url;
 
@@ -115,5 +114,14 @@ export const actions = {
         });
         
         throw redirect(303, `/story/${story_id}`);
-	}
+	},
+    draw_cards: async ({ request }) => {
+        let cards: SetOfCards = await axios.get(BACKEND_URL + 'card/draw').then(response => response.data.data);
+
+        // data = await generateImageOfCards(data);
+
+        return {
+            cards
+        }
+    }
 };
