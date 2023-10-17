@@ -15,7 +15,9 @@ services:
       # Internal server error messages will not send stacktrace to the browser in production
       - NODE_ENV=production
       # Sets the timezone of the containers OS
-      - TZ=Pacific/Auckland
+      - TZ=Europe/Paris
+      - PUBLIC_BACKEND_IP=${BOX_IP}
+      - PUBLIC_BACKEND_PORT=1335
     # Points to a file with the sensitive environment variables
     env_file:
       - ./front/.env
