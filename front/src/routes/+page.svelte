@@ -7,7 +7,6 @@
 
     import { slide, fly } from "svelte/transition";
 	import type { SetOfCards } from "$lib/types";
-	import { formToJSON } from "axios";
 	import { onMount } from "svelte";
 
     let showCards = false;
@@ -23,13 +22,6 @@
 
     async function handleOnClick(){
         drawing = true;
-    }
-
-    const image_urls = {
-        character: character_img,
-        spot: spot_img,
-        universe: universe_img,
-        quest: quest_img,
     }
 
     function handleSubmit(){
@@ -70,10 +62,10 @@
     {/if}
     {#if showCards || loading}
         <div class="grid grid-flow-col grid-rows-2 lg:grid-rows-1 max-w-2xl gap-5 mt-3">
-            <Card delay={delay*0} title={cards.character.title} description={cards.character.description} type={cards.character.type} image_url={image_urls.character} is_new={cards.character.is_new}/>
-            <Card delay={delay*2} title={cards.spot.title} description={cards.spot.description} type={cards.spot.type} image_url={image_urls.spot} is_new={cards.spot.is_new}/>
-            <Card delay={delay*4} title={cards.universe.title} description={cards.universe.description} type={cards.universe.type} image_url={image_urls.universe} is_new={cards.universe.is_new}/>
-            <Card delay={delay*6} title={cards.quest.title} description={cards.quest.description} type={cards.quest.type} image_url={image_urls.quest} is_new={cards.quest.is_new}/>
+            <Card delay={delay*0} title={cards.character.title} description={cards.character.description} type={cards.character.type} image_url={`${form?.backend_url}${cards.character.image?.url ?? cards.character.image?.data.attributes.url}`} is_new={cards.character.is_new}/>
+            <Card delay={delay*2} title={cards.spot.title} description={cards.spot.description} type={cards.spot.type} image_url={`${form?.backend_url}${cards.spot.image?.url ?? cards.spot.image?.data.attributes.url}`} is_new={cards.spot.is_new}/>
+            <Card delay={delay*4} title={cards.universe.title} description={cards.universe.description} type={cards.universe.type} image_url={`${form?.backend_url}${cards.universe.image?.url ?? cards.universe.image?.data.attributes.url}`} is_new={cards.universe.is_new}/>
+            <Card delay={delay*6} title={cards.quest.title} description={cards.quest.description} type={cards.quest.type} image_url={`${form?.backend_url}${cards.quest.image?.url ?? cards.quest.image?.data.attributes.url}`} is_new={cards.quest.is_new}/>
         </div>
     {/if}
     {#if showCards}

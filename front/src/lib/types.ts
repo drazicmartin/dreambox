@@ -3,7 +3,9 @@ export type Card = {
     title: string
     description: string
     type: string
-    image: Object
+    image: {
+        url : string
+    }
     is_new: boolean
 };
 

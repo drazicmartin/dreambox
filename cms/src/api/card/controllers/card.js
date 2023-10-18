@@ -10,11 +10,14 @@ module.exports = createCoreController('api::card.card', ({ strapi }) =>  ({
   // custom quest to draw 4 random card of each type
   async draw(ctx) {
 
+    let populate = ["image"]
+
     const universes = (await strapi.db.query('api::card.card').findMany({
         where: 
         {
             type: "universe",
         },
+        populate: populate,
     }))
 
     const characters = (await strapi.db.query('api::card.card').findMany({
@@ -22,6 +25,7 @@ module.exports = createCoreController('api::card.card', ({ strapi }) =>  ({
         {
             type: "character",
         },
+        populate: populate,
     }))
 
     const spots = (await strapi.db.query('api::card.card').findMany({
@@ -29,6 +33,7 @@ module.exports = createCoreController('api::card.card', ({ strapi }) =>  ({
         {
             type: "spot",
         },
+        populate: populate,
     }))
 
     const quests = (await strapi.db.query('api::card.card').findMany({
@@ -36,6 +41,7 @@ module.exports = createCoreController('api::card.card', ({ strapi }) =>  ({
         {
             type: "quest",
         },
+        populate: populate,
     }))
 
     const universe = universes[Math.floor(Math.random() * universes.length)];

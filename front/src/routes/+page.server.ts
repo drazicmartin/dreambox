@@ -1,9 +1,9 @@
 import { OPENAI_API_KEY } from '$env/static/private'
 import OpenAI from "openai";
 import axios from 'axios';
-import { BACKEND_URL } from '$lib/constants.js';
+import { BACKEND_ROOT_URL, BACKEND_URL } from '$lib/constants.js';
 import { redirect } from '@sveltejs/kit';
-import { generateImage, generateImageOfCards } from '$lib/utils';
+import { generateImage, generateImageOfCards, uploadImage } from '$lib/utils';
 import type { SetOfCards } from '$lib/types.js';
 
 const openai = new OpenAI({
@@ -118,10 +118,11 @@ export const actions = {
     draw_cards: async ({ request }) => {
         let cards: SetOfCards = await axios.get(BACKEND_URL + 'card/draw').then(response => response.data.data);
 
-        // data = await generateImageOfCards(data);
+        cards = await generateImageOfCards(cards);
 
         return {
-            cards
+            cards,
+            backend_url: BACKEND_ROOT_URL,
         }
     }
 };

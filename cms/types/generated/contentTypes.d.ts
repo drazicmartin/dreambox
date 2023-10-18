@@ -378,6 +378,7 @@ export interface ApiCardCard extends Schema.CollectionType {
     description: Attribute.Text;
     type: Attribute.Enumeration<['character', 'spot', 'quest', 'universe']>;
     is_new: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>;
+    image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
